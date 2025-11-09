@@ -1,0 +1,83 @@
+*{
+  margin: 0%;
+  padding: 0%;
+}
+
+.header{
+  padding: 10px;
+  width: 100%;
+  background-color: #ff5b5b;
+  color: white;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  justify-content: center;
+}
+
+.globalimg{
+  width: 20px;
+  height: 20px;
+}
+.header-text{
+  font-family: 'Inter', sans-serif;
+  font-size: 0.7rem;
+  color: white;
+}
+
+.artical-journal{
+  display: flex;
+  /* padding: 40px; */
+  margin-bottom: 20px;
+}
+
+.icon-fuji{
+ width: 7px;
+ margin-right: 4px;
+}
+
+.fuji-div{
+  width: 125px;
+  height: 168px;
+  overflow: hidden;
+  border-radius: 5px;
+  flex-shrink: 0;
+  margin-right: 19px;
+}
+.fuji{
+  width: 100%; 
+  height: 100%;
+  object-fit: cover;
+}
+.info > h2 {
+  font-family: 'Arial Narrow', Arial, sans-serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 7px;
+  margin-top: 7px;
+}
+.info > p {
+  font-family: 'Verdana', sans-serif;
+  font-size: 0.8rem;
+  line-height: 1rem;
+  margin-bottom: 7px;
+}
+.info > span{
+  font-family: 'Arial Narrow', Arial, sans-serif;
+  text-transform: uppercase;
+  font-size: 0.7rem;
+  font-weight: 700;
+}
+.date{
+  font-weight: 600;
+}
+
+.info > a {
+  font-family: 'Verdana', sans-serif;
+  font-size: 0.7rem;
+  text-decoration: underline;
+  color: #555555;
+  margin-left: 10px;
+}
+main{
+  padding: 45px;
+}
