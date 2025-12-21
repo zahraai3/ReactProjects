@@ -6,7 +6,7 @@ export default function Star(props){
                         aria-pressed={props.isFavorite}
                         aria-label={props.isFavorite ? "Remove from favorites" : "Add to favorites"}
                         className="favorite-button"
-                         onClick={props.toggleFavorite}
+                        onClick={props.toggleFavorite}
                     >
                         <img
                             src={props.icon}
