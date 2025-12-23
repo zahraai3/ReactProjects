@@ -6,9 +6,13 @@ export default function Learn(props) {
     const [pads,setpads] = React.useState(padsData)
 
 
-    const buttonsElement = pads.map(pad => (
-        <Pad key={pad.id} color={pad.color}/>
-    ))
+    const onOf = padsData.on ? "On" : "Off"
+
+    const buttonsElement = pads.map(pad => {
+        return(
+        <Pad key={pad.id} color={pad.color} on={pad.on}/>
+        )
+})
     
     return (
         <main>
