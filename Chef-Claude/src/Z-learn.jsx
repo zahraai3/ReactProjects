@@ -1,15 +1,13 @@
 import padsData from "./components/pads"
 import React from "react"
+import Pad from "./components/Pad"
 
 export default function Learn(props) {
     const [pads,setpads] = React.useState(padsData)
-    const style = {
-        backgroundColor : props.darkmode ? "#222222" : "#cccccc"
-    }
-    
+
 
     const buttonsElement = pads.map(pad => (
-        <button key={pad.id} style={style}></button>
+        <Pad key={pad.id} color={pad.color}/>
     ))
     
     return (
