@@ -5,18 +5,19 @@ import Pad from "./components/Pad"
 export default function Learn(props) {
     const [pads,setpads] = React.useState(padsData)
 
-
-    const onOf = padsData.on ? "On" : "Off"
-
     const buttonsElement = pads.map(pad => { 
         return(
-        <Pad key={pad.id} color={pad.color} on={pad.on} func={toggle}/>
+        <Pad key={pad.id} color={pad.color} on={pad.on} func={()=>toggle(pad.id)}/>
         )
 })
-    
-    function toggle(){
-        console.log("dooneeee")
-    }
+
+    function toggle(id){
+        setpads(prev => prev.map(pad => 
+        pad.id == id ? {...pad , on : !pad.on} : pad
+        ))
+        console.log("workedddd")
+    } 
+
     return (
         <main> 
             <div className="pad-container">
