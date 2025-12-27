@@ -8,14 +8,17 @@ export default function Learn(props) {
 
     const onOf = padsData.on ? "On" : "Off"
 
-    const buttonsElement = pads.map(pad => {
+    const buttonsElement = pads.map(pad => { 
         return(
-        <Pad key={pad.id} color={pad.color} on={pad.on}/>
+        <Pad key={pad.id} color={pad.color} on={pad.on} func={toggle}/>
         )
 })
     
+    function toggle(){
+        console.log("dooneeee")
+    }
     return (
-        <main>
+        <main> 
             <div className="pad-container">
                 {buttonsElement}
             </div>
