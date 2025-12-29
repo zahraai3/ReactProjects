@@ -6,7 +6,7 @@ import ClaudeRecipe from "./ClaudeRecipe"
 
 export default function Main(){
 
-    const [ingredients , setIngredients] =React.useState(["pasta", "tomato","ground beef","spices"])
+    const [ingredients , setIngredients] =React.useState([])
 
     function Add(formData){
 
