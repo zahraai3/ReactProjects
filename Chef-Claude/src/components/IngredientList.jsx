@@ -1,7 +1,7 @@
 export default function IngredientList(props){
-    const ingredientList = props.mainingredientList.map(item => {
+    const theingredientList = props.mainingredientList.map(item => {
                 return (
-                    <li key={item}>{item}</li>
+                    <li key={item }>{item}</li>
                 )
         })
 
@@ -9,9 +9,9 @@ export default function IngredientList(props){
         <section>
                     <h2>Ingredient in hand : </h2>
                     <ul className="ingredient-list" aria-live="polite">
-                        {ingredientList}
+                        {theingredientList}
                     </ul>
-                    {props.mainingredientList.length > 3 && <div className="get-recipe-container">
+                    {props.mainingredientList.length > 2 && <div className="get-recipe-container">
                         <div>
                             <h3>Ready for a recipe?</h3>
                             <p>Generate a recipe from your list of ingredients.</p>
