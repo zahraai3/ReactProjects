@@ -14,7 +14,7 @@ export default function IngredientList(props){
                     {props.mainingredientList.length > 3 && <div className="get-recipe-container">
                         <div>
                             <h3>Ready for a recipe?</h3>
-                            <p>Generate a recipe from uyour list of ingredients.</p>
+                            <p>Generate a recipe from your list of ingredients.</p>
                         </div>
                         <button onClick={props.toggleShow}>Get a recipe</button>
                     </div>}
