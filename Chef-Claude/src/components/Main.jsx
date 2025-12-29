@@ -7,6 +7,8 @@ import { getRecipeFromMistral } from "../../api/aiLeb"
 export default function Main(){
 
     const [ingredients , setIngredients] =React.useState([])
+    const [recipe,setRecipe] = React.useState("")
+    const [recipeIsShown,setrecipeisShown] = React.useState(false)
 
     function Add(formData){
 
@@ -18,12 +20,16 @@ export default function Main(){
                 )
             })}
         }
-    
 
-    const [recipeIsShown,setrecipeisShown] = React.useState(false)
-    function Showing(){
-        setrecipeisShown(prevRecio => !prevRecio)
-    }
+        async function handleGetRecipe() {
+            try{
+                const recipeMarkdown = await getRecipeFromMistral(ingredients)
+                setRecipe(recipeMarkdown)
+                setrecipeisShown(true)
+            } catch(error){
+                console.error("Error getting recipe:",error)
+            }
+        }
 
     return(
         <>
@@ -38,10 +44,10 @@ export default function Main(){
                     <button >Add ingredient</button>
                 </form>
                 {ingredients.length > 0 && <IngredientList   
-                    getRecipe={getRecipeFromMistral} 
+                    getRecipe={handleGetRecipe} 
                     mainingredientList={ingredients}
                 />}
-                    { recipeIsShown  && <ClaudeRecipe/>}
+                    { recipeIsShown  && <ClaudeRecipe recipeText={recipe}/>}
             </main>
         </>
     )
