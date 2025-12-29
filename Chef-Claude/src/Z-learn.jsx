@@ -1,6 +1,6 @@
-import padsData from "./components/pads"
+import padsData from "./sub-components/pads"
 import React from "react"
-import Pad from "./components/Pad"
+import Pad from "./sub-components/Pad"
 
 export default function Learn(props) {
     const [pads,setpads] = React.useState(padsData)

@@ -7,7 +7,7 @@ const root = createRoot(document.getElementById("root"))
 
 root.render(
     <>
-        <Learn darkmode={true}/>
+        <App/>
     </>
 )
 
