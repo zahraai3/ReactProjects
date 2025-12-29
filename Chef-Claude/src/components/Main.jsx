@@ -1,7 +1,7 @@
 import React from "react"
 import  IngredientList  from "./IngredientList"
 import ClaudeRecipe from "./ClaudeRecipe"
-
+import { getRecipeFromMistral } from "../../api/aiLeb"
 
 
 export default function Main(){
@@ -38,7 +38,7 @@ export default function Main(){
                     <button >Add ingredient</button>
                 </form>
                 {ingredients.length > 0 && <IngredientList   
-                    toggleShow={Showing} 
+                    getRecipe={getRecipeFromMistral} 
                     mainingredientList={ingredients}
                 />}
                     { recipeIsShown  && <ClaudeRecipe/>}
