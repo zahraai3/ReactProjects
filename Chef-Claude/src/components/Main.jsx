@@ -19,52 +19,61 @@ export default function Main() {
     }
   }
 
-async function handleGetRecipe() {
-  setIsLoading(true)
-  setRecipeIsShown(false)
-  
-  try {
-    const response = await fetch(
-      "https://api-inference.huggingface.co/models/mistralai/Mistral-7B-Instruct-v0.2",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": "" 
-        },
-        body: JSON.stringify({
-          inputs: `Create a simple recipe using these ingredients: ${ingredients.join(", ")}. 
+  async function handleGetRecipe() {
+    setIsLoading(true)
+    setRecipeIsShown(false)
+    
+    try {
+      // استخدام Hugging Face Inference API
+      const response = await fetch(
+        "https://api-inference.huggingface.co/models/mistralai/Mistral-7B-Instruct-v0.2",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            inputs: `Create a simple recipe using these ingredients: ${ingredients.join(", ")}. 
+
 Format the recipe with:
 - Recipe name
 - List of ingredients
 - Cooking steps (numbered)
+
 Keep it short and easy.`,
-          parameters: {
-            max_new_tokens: 400,
-            temperature: 0.7,
-            top_p: 0.9,
-            return_full_text: false
-          }
-        })
+            parameters: {
+              max_new_tokens: 400,
+              temperature: 0.7,
+              top_p: 0.9,
+              return_full_text: false
+            }
+          })
+        }
+      )
+
+      const data = await response.json()
+      
+      if (data[0]?.generated_text) {
+        setRecipe(data[0].generated_text)
+        setRecipeIsShown(true)
+      } else if (data.error) {
+        // إذا كان النموذج يحمّل، انتظر وحاول مرة أخرى
+        if (data.error.includes("loading")) {
+          setRecipe("")
+          setRecipeIsShown(true)
+        } else {
+          setRecipe("an error accured")
+          setRecipeIsShown(true)
+        }
       }
-    )
-    const data = await response.json()
-    
-    if (data[0]?.generated_text) {
-      setRecipe(data[0].generated_text)
+    } catch (err) {
+      console.error("Error:", err)
+      setRecipe("❌ try again")
       setRecipeIsShown(true)
-    } else {
-      setRecipe("حدث خطأ في توليد الوصفة")
-      setRecipeIsShown(true)
+    } finally {
+      setIsLoading(false)
     }
-  } catch (err) {
-    console.error("Error:", err)
-    setRecipe("❌ حاول مرة أخرى")
-    setRecipeIsShown(true)
-  } finally {
-    setIsLoading(false)
   }
-}
 
   return (
     <main>
