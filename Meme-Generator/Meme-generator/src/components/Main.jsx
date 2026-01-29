@@ -16,17 +16,18 @@ export default function Main() {
     }
 
     const [memePics,setMemepics] = useState([])
+
     useEffect(async () => {
-    const res = await fetch("https://api.imgflip.com/get_memes")
-    const data = await res.json()
-    setMemepics(data.data.memes)
-},[])
+        const res = await fetch("https://api.imgflip.com/get_memes")
+        const data = await res.json()
+        setMemepics(data.data.memes)
+    },[])
 
 
     function handleMeme(){  
         if (memePics.length == 0) return
 
-        const randomPic= memePics[Math.floor(Math.random() * memePics.length)]
+        const randomPic = memePics[Math.floor(Math.random() * memePics.length)]
         setMeme(prev =>({
             ...prev,
             imageUrl:randomPic.url
