@@ -17,11 +17,12 @@ export default function Main() {
         setIngredients(prevIngredients => [...prevIngredients, newIngredient])
     }
 
-    //heres the addition of REFs
+    //heres the addition of REF
+    //we added the SMOOTH behavior 
     const recipeSection = React.useRef(null)
     React.useEffect(()=>{
         if(recipeShown && recipeSection.current !== null){
-          recipeSection.current.scrollIntoView()
+          recipeSection.current.scrollIntoView({behavior: "smooth"})
         }
     },[recipeShown])
     return (
