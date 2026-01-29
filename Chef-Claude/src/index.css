@@ -30,14 +30,14 @@ main {
     padding: 30px 30px 10px;
 }
 
-.add-form {
+.add-ingredient-form {
     display: flex;
     justify-content: center;
     gap: 12px;
     height: 38px;
 }
 
-.add-form > input {
+.add-ingredient-form > input {
     border-radius: 6px;
     border: 1px solid #D1D5DB;
     padding: 9px 13px;
@@ -47,7 +47,7 @@ main {
     max-width: 400px;
 }
 
-.add-form > button {
+.add-ingredient-form > button {
     font-family: Inter, sans-serif;
     border-radius: 6px;
     border: none;
@@ -58,7 +58,7 @@ main {
     font-weight: 500;
 }
 
-.add-form > button::before {
+.add-ingredient-form > button::before {
     content: "+";
     margin-right: 5px;
 }
@@ -104,9 +104,14 @@ ul.ingredients-list > li {
     font-size: 0.875rem;
     cursor: pointer;
 }
-section > h2 {
-    font-size: 1.2rem;
-    font-weight: 500;
-    margin-bottom: 16px;
-    
+
+.suggested-recipe-container {
+    color: #475467;
+    line-height: 28px;
+    font-size: 1.125rem;
+    font-weight: 400;
+}
+
+.suggested-recipe-container ul li, .suggested-recipe-container ol li {
+    margin-bottom: 8px;
 }
