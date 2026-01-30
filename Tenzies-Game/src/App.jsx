@@ -16,6 +16,12 @@ export default function App(){
         return numsArr
     }
     
+    let gameWon = false
+    if(dice.every(die => die.isHeld === true && dice[0].value === die.value)){
+        console.log("wonnnnnn")
+        gameWon = true
+    }
+    
 
     const DiceElements = dice.map((diceObj)=>{
         return <Die value={diceObj.value} key={diceObj.id} isHeld={diceObj.isHeld} holdFunc={hold} id={diceObj.id}/>
@@ -42,10 +48,11 @@ export default function App(){
         <main>
             <h1 className="title">Tenzies</h1>
             <p className="instructions">Roll until all dice are the same. Click each die to freeze it at its current value between rolls.</p>
+
             <div className="container">
                 {DiceElements}
             </div>
-            <button className="roll-dice " onClick={rollDice}>Roll</button>
+            <button className="roll-dice " onClick={rollDice}>{gameWon ? "New Game" : "Roll"}</button>
         </main>
     )
 }
