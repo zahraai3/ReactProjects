@@ -19,11 +19,16 @@ export default function App(){
         return <Die value={num} />
     })
 
+    function rollDice(){
+        setDice(allNewDice)
+    }
+
     return(
         <main>
             <div className="container">
                 {DiceElements}
             </div>
+            <button className="roll-dice" onClick={rollDice}>Roll</button>
         </main>
     )
 }
