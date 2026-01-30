@@ -10,20 +10,29 @@ export default function App(){
         const numsArr = []
         for (let i=0;i<10;i++){
             const rand = Math.floor(Math.random() * 6)+1
-            const obj = {value: rand , isHeld:false , id: nanoid() }
+            const obj = {value: rand , isHeld:true , id: nanoid() }
             numsArr.push(obj)
         }
         return numsArr
     }
-    console.log(generateAllNewDice())
+    
 
     const DiceElements = dice.map((diceObj)=>{
-        return <Die value={diceObj.value} key={diceObj.id}/>
+        return <Die value={diceObj.value} key={diceObj.id} isHeld={diceObj.isHeld} holdFunc={hold} id={diceObj.id}/>
     })
 
     function rollDice(){
         setDice(generateAllNewDice)
     }
+
+    function hold(id) {
+    setDice(prevDice =>
+        prevDice.map(item =>
+            item.id === id ? { ...item, isHeld: !item.isHeld } : item
+        )
+    )
+}
+
 
     return(
         <main>
