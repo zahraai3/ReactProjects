@@ -10,7 +10,7 @@ export default function App(){
         const numsArr = []
         for (let i=0;i<10;i++){
             const rand = Math.floor(Math.random() * 6)+1
-            const obj = {value: rand , isHeld:true , id: nanoid() }
+            const obj = {value: rand , isHeld:false , id: nanoid() }
             numsArr.push(obj)
         }
         return numsArr
@@ -22,7 +22,11 @@ export default function App(){
     })
 
     function rollDice(){
-        setDice(generateAllNewDice)
+        setDice(prev =>
+            prev.map(item =>
+                item.isHeld ? item : { ...item , value: Math.ceil(Math.random() * 6)}
+            )
+        )
     }
 
     function hold(id) {
@@ -36,6 +40,8 @@ export default function App(){
 
     return(
         <main>
+            <h1 className="title">Tenzies</h1>
+            <p className="instructions">Roll until all dice are the same. Click each die to freeze it at its current value between rolls.</p>
             <div className="container">
                 {DiceElements}
             </div>
