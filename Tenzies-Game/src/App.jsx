@@ -40,11 +40,15 @@ export default function App(){
     })
 
     function rollDice(){
-        setDice(prev =>
-            prev.map(item =>
-                item.isHeld ? item : { ...item , value: Math.ceil(Math.random() * 6)}
+        if(gameWon){
+            setDice(generateAllNewDice())
+        } else {
+            setDice(prev =>
+                prev.map(item =>
+                    item.isHeld ? item : { ...item , value: Math.ceil(Math.random() * 6)}
+                )
             )
-        )
+        }
     }
 
     function hold(id) {
