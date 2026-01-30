@@ -6,8 +6,19 @@ import Confetti from "react-confetti"
 export default function App(){
 
     const [dice,setDice] = React.useState(generateAllNewDice)
+// كل مرة component يعيد render، الكود كله ينكتب من جديد.
+
+// إذا initial state كان فنكشن ثقيل ونفذته فوراً → كل render راح يشتغل زيادة.
+
+// الليزي ستيت تحل المشكلة:
+
+// React تنادي الفنكشن مرة وحدة فقط.
+
+// يحافظ على الأداء.
+
 
     function generateAllNewDice(){
+        console.log(" function calleddddd")
         const numsArr = []
         for (let i=0;i<10;i++){
             const rand = Math.floor(Math.random() * 6)+1
