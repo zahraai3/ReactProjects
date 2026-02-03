@@ -7,6 +7,23 @@ export default function App(){
 
     const [currentWord , setCurrentWord] = React.useState("react")
 
+    const [guessedLetters , setGuessedLetters] = React.useState([])
+
+    //First way to do this :
+    // function addGuessedLetter(letter){
+    //     setGuessedLetters(prevguess =>  
+    //         prevguess.includes(letter) ? prevguess : [...prevguess,letter])
+    // }
+
+    //another way to do it :  // similar to an array but it doesnt accept doublicated 
+    function addGuessedLetter(letter){
+        setGuessedLetters(prev => {
+            const letterSet = new Set(prev)
+            letterSet.add(letter)
+            return Array.from(letterSet)
+        })
+    }
+
     const alphabet = "abcdefghijklmnopqrstuvwxyz"
 
     const langElements = languages.map((item) => (
@@ -22,12 +39,15 @@ export default function App(){
     ))
 
     const letterElement = currentWord.split("").map(letter => (
-        <span>{letter.toUpperCase()}</span>
+        <span key={letter}>{letter.toUpperCase()}</span>
     ))  
 
     const keyboardElement = alphabet.split("").map((letter , index) => (
-        <button key={index}>{letter.toUpperCase()}</button>
+        <button key={index} onClick={() => addGuessedLetter(letter)}>{letter.toUpperCase()}</button>
     ))
+
+    console.log(guessedLetters)
+
     return(
         <>
             <main>
