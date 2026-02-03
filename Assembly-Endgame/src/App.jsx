@@ -10,7 +10,7 @@ export default function App(){
 
     const [guessedLetters , setGuessedLetters] = React.useState([])
 
-    //another way to do it :  // similar to an array but it doesnt accept doublicated 
+    //SET is similar to an array but it doesnt accept doublicated 
     function addGuessedLetter(letter){
             setGuessedLetters(prev => 
             prev.includes(letter) ? prev : [...prev , letter]
@@ -19,6 +19,7 @@ export default function App(){
 
     const alphabet = "abcdefghijklmnopqrstuvwxyz"
 
+    //langs display
     const langElements = languages.map((item) => (
         <span className="chip"
             key={item.name}
@@ -31,11 +32,12 @@ export default function App(){
         </span>
     ))
 
+    //word letter displaying
     const letterElement = currentWord.split("").map(letter => (
-        <span key={letter}>{letter.toUpperCase()}</span>
+        <span  key={letter}>{guessedLetters.includes(letter) ?  letter.toUpperCase() : ""}</span>
     ))  
 
-    //EDITED
+    //keyboars display
     const keyboardElement = alphabet.split("").map((letter, index) => {
 
     const isGuessed = guessedLetters.includes(letter)
