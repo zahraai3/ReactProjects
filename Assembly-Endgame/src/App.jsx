@@ -63,6 +63,7 @@ export default function App(){
             )}
             key={index}
             onClick={() => addGuessedLetter(letter)}
+            disabled = {isGameOver}
         >
             {letter.toUpperCase()}
         </button>
