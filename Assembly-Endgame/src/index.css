@@ -110,4 +110,14 @@ button.new-game {
     margin-inline: auto;
     cursor: pointer;
 }
+section.keyboard > button.letterBtn{
+    background-color: #FCBA29;
+}
 
+section.keyboard > button.RightBtn{
+    background-color: #10A95B;
+}
+
+section.keyboard > button.falseBtn{
+    background-color: #E94560;
+}

@@ -2,6 +2,7 @@ import Header from "./components/Header"
 import Main from "./components/Main"
 import { languages  } from "./assets/languages"
 import React from "react"
+import clsx from 'clsx'
 
 export default function App(){
 
@@ -9,19 +10,11 @@ export default function App(){
 
     const [guessedLetters , setGuessedLetters] = React.useState([])
 
-    //First way to do this :
-    // function addGuessedLetter(letter){
-    //     setGuessedLetters(prevguess =>  
-    //         prevguess.includes(letter) ? prevguess : [...prevguess,letter])
-    // }
-
     //another way to do it :  // similar to an array but it doesnt accept doublicated 
     function addGuessedLetter(letter){
-        setGuessedLetters(prev => {
-            const letterSet = new Set(prev)
-            letterSet.add(letter)
-            return Array.from(letterSet)
-        })
+            setGuessedLetters(prev => 
+            prev.includes(letter) ? prev : [...prev , letter]
+            )
     }
 
     const alphabet = "abcdefghijklmnopqrstuvwxyz"
@@ -42,11 +35,26 @@ export default function App(){
         <span key={letter}>{letter.toUpperCase()}</span>
     ))  
 
-    const keyboardElement = alphabet.split("").map((letter , index) => (
-        <button key={index} onClick={() => addGuessedLetter(letter)}>{letter.toUpperCase()}</button>
-    ))
+    //EDITED
+    const keyboardElement = alphabet.split("").map((letter, index) => {
 
-    console.log(guessedLetters)
+    const isGuessed = guessedLetters.includes(letter)
+    const isRight = currentWord.includes(letter); 
+
+    return (
+        <button
+            className={clsx(
+                "letterBtn",
+                isGuessed && isRight && "RightBtn",
+                isGuessed && !isRight && "falseBtn"
+            )}
+            key={index}
+            onClick={() => addGuessedLetter(letter)}
+        >
+            {letter.toUpperCase()}
+        </button>
+    )
+    })
 
     return(
         <>
