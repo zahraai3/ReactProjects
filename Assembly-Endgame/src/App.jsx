@@ -1,6 +1,7 @@
 import { languages  } from "./assets/languages"
 import React from "react"
 import clsx from 'clsx'
+import { getFarewellText } from "./assets/utils"
 
 export default function App(){
 
@@ -75,10 +76,6 @@ export default function App(){
     })
 
     function renderGameStatus(){
-        if(!isGameOver){
-            return null
-        }
-
         if(isGameWon){
             return (
                         <>
@@ -86,7 +83,8 @@ export default function App(){
                             <p>Well done! 🎉</p>
                         </> 
                     )
-        }else{
+        }
+        if(isGameLost){
             return (
                         <>
                             <h2>Game Over!</h2>
@@ -94,8 +92,23 @@ export default function App(){
                         </>
                 )
         }
-
-
+        else {
+            //هاي هنا طريقتي الي توصلتلها علمود اكدر اعرض هاي الجزىيه وحسب الشروط
+            if(guessedLetters.length == 0){
+                    return null
+            }else {
+                if (!currentWord.includes(guessedLetters[guessedLetters.length - 1]) ){
+                        const lang = languages[wrongGuessCount -1].name
+                        return (
+                            <>
+                                <h2>{getFarewellText(lang)}</h2>
+                            </>
+                        )
+                    }
+                
+            }
+        
+        }
     }
 
     return(
