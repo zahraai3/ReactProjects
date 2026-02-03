@@ -8,14 +8,14 @@ export default function App(){
     const [currentWord , setCurrentWord] = React.useState("react")
     const [guessedLetters , setGuessedLetters] = React.useState([])
 
-    
     //counting the wrong guesses
     const wrongGuessCount = guessedLetters.filter(letter => !currentWord.includes(letter)).length
-    console.log(wrongGuessCount)
     
     const isGameWon = currentWord.split("").every(letter => guessedLetters.includes(letter))
     const isGameLost = wrongGuessCount >= (languages.length - 1)
     const isGameOver = isGameWon || isGameLost
+    const lastGuessedLetter = guessedLetters[guessedLetters.length -1]
+    const isLastGuessIncorrect = lastGuessedLetter &&  !currentWord.includes(lastGuessedLetter)
     
     //SET is similar to an array but it doesnt accept doublicated 
     function addGuessedLetter(letter){
@@ -72,42 +72,35 @@ export default function App(){
 
     const gameStatusClass = clsx("game-status" , {
         won : isGameWon ,
-        lost : isGameLost
+        lost : isGameLost,
+        farewell : !isGameOver && isLastGuessIncorrect
     })
 
-    function renderGameStatus(){
-        if(isGameWon){
+    function renderGameStatus() {
+        if (!isGameOver && isLastGuessIncorrect) {
             return (
-                        <>
-                            <h2>You win!</h2>
-                            <p>Well done! 🎉</p>
-                        </> 
-                    )
+                <p className="farewell-message">
+                    {getFarewellText(languages[wrongGuessCount - 1].name)}
+                </p>
+            )
         }
-        if(isGameLost){
+
+        if (isGameWon) {
             return (
-                        <>
-                            <h2>Game Over!</h2>
-                            <p>You lose! Better start learning Assembly 😭</p>
-                        </>
-                )
-        }
-        else {
-            //هاي هنا طريقتي الي توصلتلها علمود اكدر اعرض هاي الجزىيه وحسب الشروط
-            if(guessedLetters.length == 0){
-                    return null
-            }else {
-                if (!currentWord.includes(guessedLetters[guessedLetters.length - 1]) ){
-                        const lang = languages[wrongGuessCount -1].name
-                        return (
-                            <>
-                                <h2>{getFarewellText(lang)}</h2>
-                            </>
-                        )
-                    }
-                
-            }
-        
+                <>
+                    <h2>You win!</h2>
+                    <p>Well done! 🎉</p>
+                </>
+            )
+        } if (isGameLost) {
+            return (
+                <>
+                    <h2>Game over!</h2>
+                    <p>You lose! Better start learning Assembly 😭</p>
+                </>
+            )
+        } else{
+            return null
         }
     }
 
