@@ -46,9 +46,17 @@ export default function App(){
     ))
 
     //word letter displaying
-    const letterElement = currentWord.split("").map(letter => (
-        <span  key={letter}>{guessedLetters.includes(letter) ?  letter.toUpperCase() : ""}</span>
-    ))  
+    const letterElement = currentWord.split("").map((letter , index) => {
+        const shouldRevealLetter = isGameLost || guessedLetters.includes(letter)
+        const letterClassName = clsx(
+            isGameLost && !guessedLetters.includes(letter) && "missed-letter"
+        )
+        return(
+            <span key={index} className={letterClassName}>
+                {shouldRevealLetter ? letter.toUpperCase() : ""}
+            </span>
+        )
+    })  
 
     //keyboars display
     const keyboardElement = alphabet.split("").map((letter, index) => {
