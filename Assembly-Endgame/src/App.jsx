@@ -1,8 +1,13 @@
 import Header from "./components/Header"
 import Main from "./components/Main"
 import { languages  } from "./assets/languages"
+import React from "react"
 
 export default function App(){
+
+    const [currentWord , setCurrentWord] = React.useState("react")
+
+    const alphabet = "abcdefghijklmnopqrstuvwxyz"
 
     const langElements = languages.map((item) => (
         <span className="chip"
@@ -16,6 +21,13 @@ export default function App(){
         </span>
     ))
 
+    const letterElement = currentWord.split("").map(letter => (
+        <span>{letter.toUpperCase()}</span>
+    ))  
+
+    const keyboardElement = alphabet.split("").map((letter , index) => (
+        <button key={index}>{letter.toUpperCase()}</button>
+    ))
     return(
         <>
             <main>
@@ -30,6 +42,13 @@ export default function App(){
                 <section className="language-chips">
                     {langElements}
                 </section >
+                <section className="word">
+                    {letterElement}
+                </section>
+                <section className="keyboard">
+                    {keyboardElement}
+                </section>
+                <button className="new-game">New Game</button>
             </main>
         </>
     )
