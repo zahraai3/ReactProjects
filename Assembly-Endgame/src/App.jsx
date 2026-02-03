@@ -2,10 +2,11 @@ import { languages  } from "./assets/languages"
 import React from "react"
 import clsx from 'clsx'
 import { getFarewellText } from "./assets/utils"
+import { getRandomWord } from "./assets/utils"
 
 export default function App(){
 
-    const [currentWord , setCurrentWord] = React.useState("react")
+    const [currentWord , setCurrentWord] = React.useState(getRandomWord)
     const [guessedLetters , setGuessedLetters] = React.useState([])
 
     //counting the wrong guesses
