@@ -8,11 +8,16 @@ export default function App(){
 
     const [currentWord , setCurrentWord] = React.useState("react")
     const [guessedLetters , setGuessedLetters] = React.useState([])
+
     
     //counting the wrong guesses
     const wrongGuessCount = guessedLetters.filter(letter => !currentWord.includes(letter)).length
     console.log(wrongGuessCount)
-
+    
+    const isGameWon = currentWord.split("").every(letter => guessedLetters.includes(letter))
+    const isGameLost = wrongGuessCount >= (languages.length - 1)
+    const isGameOver = isGameWon || isGameLost
+    
     //SET is similar to an array but it doesnt accept doublicated 
     function addGuessedLetter(letter){
             setGuessedLetters(prev => 
@@ -66,6 +71,11 @@ export default function App(){
     })
 
 
+    const gameStatusClass = clsx("game-status" , {
+        won : isGameWon ,
+        lost : isGameLost
+    })
+
     return(
         <>
             <main>
@@ -73,9 +83,23 @@ export default function App(){
                     <h1>Assembly: Endgame</h1>
                     <p>Guess the word in under 8 attempts to keep the programming world safe from Assembly!</p>
                 </header>
-                <section className="game-status">
-                    <h2>You win!</h2>
-                    <p>Well done! 🎉</p>
+                <section className={gameStatusClass}>
+                    { isGameOver ? (
+                        isGameWon ? (
+                            <>
+                                <h2>You win!</h2>
+                                <p>Well done! 🎉</p>
+                            </> ) : (
+                                <>
+                                <h2>Game Over!</h2>
+                                <p>You lose! Better start learning Assembly 😭</p>
+                                </>
+                            )
+                    ) : (
+                        null
+                    )
+
+                    }
                 </section>
                 <section className="language-chips">
                     {langElements}
@@ -86,7 +110,7 @@ export default function App(){
                 <section className="keyboard">
                     {keyboardElement}
                 </section>
-                <button className="new-game">New Game</button>
+                {isGameOver && <button className="new-game">New Game</button>}
             </main>
         </>
     )
