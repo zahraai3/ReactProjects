@@ -3,6 +3,7 @@ import React from "react"
 import clsx from 'clsx'
 import { getFarewellText } from "./assets/utils"
 import { getRandomWord } from "./assets/utils"
+import Confetti from "react-confetti"
 
 export default function App(){
 
@@ -101,6 +102,7 @@ export default function App(){
         if (isGameWon) {
             return (
                 <>
+                    {isGameWon && <Confetti/>}
                     <h2>You win!</h2>
                     <p>Well done! 🎉</p>
                 </>
