@@ -7,21 +7,28 @@ import clsx from 'clsx'
 export default function App(){
 
     const [currentWord , setCurrentWord] = React.useState("react")
-
     const [guessedLetters , setGuessedLetters] = React.useState([])
+    
+    //counting the wrong guesses
+    const wrongGuessCount = guessedLetters.filter(letter => !currentWord.includes(letter)).length
+    console.log(wrongGuessCount)
 
     //SET is similar to an array but it doesnt accept doublicated 
     function addGuessedLetter(letter){
             setGuessedLetters(prev => 
             prev.includes(letter) ? prev : [...prev , letter]
             )
+
     }
 
     const alphabet = "abcdefghijklmnopqrstuvwxyz"
 
     //langs display
-    const langElements = languages.map((item) => (
-        <span className="chip"
+    const langElements = languages.map((item ,index) => (
+        <span className={clsx(
+            "chip",
+            wrongGuessCount > index && "lost" 
+        )}
             key={item.name}
             style={ {
                     backgroundColor:item.backgroundColor ,
@@ -57,6 +64,7 @@ export default function App(){
         </button>
     )
     })
+
 
     return(
         <>
